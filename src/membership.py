@@ -56,26 +56,32 @@ ADDITIONAL_FEATURES = {
 
 
 def get_available_plans():
+    """Return the dictionary of available membership plans."""
     return MEMBERSHIP_PLANS
 
 
 def get_available_features():
+    """Return the dictionary of available additional features."""
     return ADDITIONAL_FEATURES
 
 
 def validate_membership_plan(plan):
+    """Check if the membership plan is valid."""
     return plan in MEMBERSHIP_PLANS
 
 
 def validate_additional_features(features):
+    """Check if all additional features are valid."""
     return all(feature in ADDITIONAL_FEATURES for feature in features)
 
 
 def validate_members_count(members_count):
+    """Check if the members count is a valid positive integer."""
     return isinstance(members_count, int) and members_count >= 1
 
 
 def calculate_base_membership_cost(plan):
+    """Calculate the base cost of a membership plan."""
     if not validate_membership_plan(plan):
         raise ValueError("Selected membership plan is not available.")
 
@@ -83,6 +89,7 @@ def calculate_base_membership_cost(plan):
 
 
 def calculate_additional_features_cost(features):
+    """Calculate the total cost of additional features."""
     if not validate_additional_features(features):
         raise ValueError("One or more selected features are not available.")
 
@@ -95,6 +102,7 @@ def calculate_additional_features_cost(features):
 
 
 def contains_premium_features(features):
+    """Check if any of the selected features are premium."""
     if not validate_additional_features(features):
         raise ValueError("One or more selected features are not available.")
 
@@ -102,6 +110,7 @@ def contains_premium_features(features):
 
 
 def calculate_group_discount(subtotal, members_count):
+    """Calculate the group discount (10% for 2+ members)."""
     if members_count >= 2:
         return subtotal * 0.10
 
@@ -109,6 +118,7 @@ def calculate_group_discount(subtotal, members_count):
 
 
 def calculate_special_offer_discount(subtotal):
+    """Calculate the special offer discount based on subtotal."""
     if subtotal > 400:
         return 50
 
@@ -119,6 +129,7 @@ def calculate_special_offer_discount(subtotal):
 
 
 def calculate_premium_surcharge(subtotal, features):
+    """Calculate the premium surcharge (15% if premium features are included)."""
     if contains_premium_features(features):
         return subtotal * 0.15
 
@@ -126,6 +137,7 @@ def calculate_premium_surcharge(subtotal, features):
 
 
 def calculate_membership_total(plan, features=None, members_count=1, confirmed=True):
+    """Calculate the total membership cost including all discounts and surcharges."""
     if features is None:
         features = []
 
@@ -163,6 +175,7 @@ def calculate_membership_total(plan, features=None, members_count=1, confirmed=T
 
 
 def generate_membership_summary(plan, features=None, members_count=1):
+    """Generate a detailed summary of the membership with all cost breakdowns."""
     if features is None:
         features = []
 
@@ -222,4 +235,3 @@ def generate_membership_summary(plan, features=None, members_count=1):
         "premium_surcharge": round(premium_surcharge, 2),
         "total": total,
     }
-
