@@ -1,3 +1,4 @@
+"""Business logic for gym membership plans, features, discounts, and totals."""
 MEMBERSHIP_PLANS = {
     "basic": {
         "name": "Basic",
@@ -201,7 +202,6 @@ def generate_membership_summary(plan, features=None, members_count=1):
     total = calculate_membership_total(
         plan=plan,
         features=features,
-        members_count=members_count,
         confirmed=True,
     )
 
@@ -222,3 +222,4 @@ def generate_membership_summary(plan, features=None, members_count=1):
         "premium_surcharge": round(premium_surcharge, 2),
         "total": total,
     }
+
