@@ -1,4 +1,4 @@
-
+"""Unit tests for the gym membership business logic."""
 import pytest
 
 from src.membership import (
@@ -12,7 +12,6 @@ from src.membership import (
     calculate_special_offer_discount,
     calculate_premium_surcharge,
     calculate_membership_total,
-    generate_membership_summary,
 )
 
 
